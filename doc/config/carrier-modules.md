@@ -7,13 +7,13 @@
 
 `carrier_modules`: This is a list of modules that the number manager uses to interact with carriers. There are two special modules:
 
-`wnm_local`: numbers that utilize this module are assumed to be managed manually by account admins and are treated as untrusted numbers
+`knm_local`: numbers that utilize this module are assumed to be managed manually by account admins and are treated as untrusted numbers
 
-`wnm_other`: numbers that utilize this module are assumed to be managed by the **Kazoo** cluster admins and are treated as trusted numbers
+`knm_other`: numbers that utilize this module are assumed to be managed by the **Kazoo** cluster admins and are treated as trusted numbers
 
 Other modules exist some of which currently search, provision and maintain numbers via certain carriers APIs. This list is growing.
 
-`carrier_modules : ["wnm_other", "wnm_local"]`
+`carrier_modules : ["knm_other", "knm_local"]`
 
 "providers": This is a list of modules that provide supplemental services to numbers. These service range from sending port request emails to provisioning US E911 in realtime. Providers can be applied to any trusted number (in other words numbers managed by the **Kazoo** cluster admins). Enabled providers look for specific properties on numbers and take action when they are added, removed, or changed. For example, the port_notifier module will send a email to the **Kazoo** cluster admins if a number is added with a port property, notifying them a port needs to take place.
 
@@ -33,14 +33,14 @@ Other modules exist some of which currently search, provision and maintain numbe
 
 `porting_module_name`: If a number is added to the system in the `port_in` state this carrier module will be invoked to provision the number automatically. Any carrier module is valid for this property but only certain modules will preform realtime provisiong. If a carrier module is specified that does not have this capability the **Kazoo** cluster admins should enable the `port_notifier` provider so they will receive an email (and can manually port the number).
 ```
- porting_module_name" : "wnm_bandwidth"
+ porting_module_name" : "knm_bandwidth"
 
 {
    "_id":"number_manager",
    "default":{
       "carrier_modules":[
-         "wnm_local",
-         "wnm_other"
+         "knm_local",
+         "knm_other"
       ],
       "reconcile_regex":"^\\+?1?\\d{10}$|^\\+[2-9]\\d{7,}$|^011\\d*$|^00\\d*$",
       "providers":[
